@@ -11,3 +11,26 @@ const shoppingCard = [];
 
 
 
+
+function render(priceList) {
+    const parentContainer = document.querySelector(".container");
+  
+    priceList.forEach((element, i) => {
+      const buyBtn = document.createElement("button");
+      
+      //Add how to pase parameters and bind to addItems?
+    //   buyBtn.addEventListener("click", addItem);
+
+
+      buyBtn.setAttribute("id", i);
+      buyBtn.textContent = priceList[i].item;
+      parentContainer.appendChild(buyBtn);
+    });
+  }
+  
+
+
+  function addToShoppingCard(){
+    const itemIndexId = parseInt(this.id);
+    
+  }
