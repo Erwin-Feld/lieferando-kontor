@@ -6,9 +6,6 @@ const shoppingItems = [];
 // console.log(Object.keys(kontorGoods[0])[0]);
 
 /* display key */
-for (i in kontorGoods) {
-  console.log(Object.keys(kontorGoods[i])[0]);
-}
 
 // console.log(Object.keys([kontorGoods[0]]))
 
@@ -51,16 +48,18 @@ beide gleich breit
 eins hat links items andere hat rechts div items 
 
 
+
+
+
 */
 
 function render(kontorGoodsArray, shoppingItemsArray) {
   const parentContainer = document.querySelector(".container");
-  // for i in kontorgods
-  // create buttons and there id to index
+
   kontorGoodsArray.forEach((element, i) => {
     const buyBtn = document.createElement("button");
-    //Add how to pase parameters and bind to addGoods?
-    buyBtn.addEventListener("click", addGood);
+    //Add how to pase parameters and bind to addItems?
+    buyBtn.addEventListener("click", addItem);
     // buy cheese
     //
     buyBtn.setAttribute("id", i);
@@ -69,37 +68,38 @@ function render(kontorGoodsArray, shoppingItemsArray) {
   });
 }
 
-function addGood() {
+function updateItem(objArray, objIndex) {
+  const currentObjkey = Object.keys(objArray[objIndex])[0];
+  console.log(currentObjkey);
+
+  const currentObjValue = Object.values(objArray[objIndex])[0];
+
+  return (objArray[objIndex] = {
+    //  ^^^^^^^^^^^^^^^^^^^^^
+    ...objArray[objIndex],
+    // add the key as a variable
+    //   FIXME add value from kontor value
+    [currentObjkey]: currentObjValue + currentObjValue,
+  });
+}
+
+
+function addItem() {
   // click
   const itemIndex = parseInt(this.id);
-  // get id of button
-  // das ist der index
-  // index muss in int mugewandelt werden
-  //
+ 
+  //FIXME denkt ist was anderes
+  const currentObjkey = Object.keys(kontorGoods[itemIndex])[0];
 
-  // check if object is inside array
-  if (shoppingItems.includes(kontorGoods[itemIndex])) {
-    const item = Object.values(kontorGoods[itemIndex])[0];
-    // add a 4 to the value x
-    //
-    // shoppingItems[itemIndex].value += item;
-    //   Object.values(kontorGoods[itemIndex])[0] = 12
-    updateObj(shoppingItems, itemIndex);
+  if (machedKeys(shoppingItems, itemIndex)) {
+    console.log("item updated");
 
-    const currentObjkey = Object.keys(kontorGoods[itemIndex])[0];
-    const currentObjValue = Object.values(kontorGoods[itemIndex])[0];
-
-    //   works
-    //   const shoppingNEwItems = {...shoppingItems, [currentObjkey]: currentObjValue + currentObjValue };
-
-    //   console.log( Object.values(kontorGoods[itemIndex])[0])
-    // add value to previos value
+    updateItem(shoppingItems, itemIndex);
   } else {
+    console.log("no found gets added");
     shoppingItems.push(kontorGoods[itemIndex]);
-    console.log("pusehd");
+    console.log("item added");
   }
-
-  console.log(Object.values(kontorGoods[itemIndex])[0]);
 }
 
 /* shif alt a */
@@ -107,14 +107,29 @@ function addGood() {
 
 // use variable as object kay
 
-function updateObj(objArray, objIndex) {
-  const currentObjkey = Object.keys(objArray[objIndex])[0];
-  const currentObjValue = Object.values(objArray[objIndex])[0];
+/**
+ * check if current key is inside the looped array
+ * @param { Array } objectContainer - looped over objectContainer
+ * @param { Number } itemIndex current Item index
+ */
 
-  return {
-    ...objArray[objIndex],
-    //    Object.keys(kontorGoodsArray[i])[0]
-    // add the key as a variable
-    [currentObjkey]: currentObjValue + currentObjValue,
-  };
+function machedKeys(objectContainer, itemIndex) {
+  const currentObjkey = Object.keys(kontorGoods[itemIndex])[0];
+
+  for (let element of objectContainer) {
+    if (element.hasOwnProperty(currentObjkey)) {
+      //
+      return true;
+    }
+  }
 }
+
+/* Add delete
+    button click 
+    trick benutzren 
+    delete button id index + 0.1
+    
+    um index zu erfahren mache ich id mit parsefloat 
+    so bekomme ich korrekte stelle !!!
+
+*/
