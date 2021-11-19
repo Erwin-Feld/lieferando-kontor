@@ -65,7 +65,7 @@ function render(kontorGoodsArray, shoppingItemsArray){
     // create buttons and there id to index 
     kontorGoodsArray.forEach((element, i) => {
         const buyBtn = document.createElement("button");
-        buyBtn.addEventListener("click", addGood)
+        buyBtn.addEventListener("click", addGood.bind(kontorGoodsArray, shoppingItemsArray))
         // buy cheese
         // 
         buyBtn.setAttribute("id", i)
@@ -87,13 +87,13 @@ function addGood(kontorGoodsArray, shoppingItemsArray){
     // 
     console.log(kontorGoodsArray)
     // check if object is inside array
-    if(shoppingItemsArray.includes(kontorGoodsArray[itemIndex])){
-        // add value to previos value
-    } else {
-        shoppingItemsArray.push(kontorGoodsArray[itemIndex])
-    }
+    // if(shoppingItemsArray.includes(kontorGoodsArray[itemIndex])){
+    //     // add value to previos value
+    // } else {
+    //     shoppingItemsArray.push(kontorGoodsArray[itemIndex])
+    // }
 
-    console.log(shoppingItemsArray)
+    // console.log(shoppingItemsArray)
 }
 
 
