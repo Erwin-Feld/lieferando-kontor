@@ -22,39 +22,32 @@ function render(itemsDb, shoppingCard) {
 }
 
 function addToShoppingCard() {
-   
   const itemIndexId = parseInt(this.id);
 
+  /* if item already appended */
   if (shoppingCard.some((item) => item.id === itemIndexId)) {
-    //   const indexNR = shoppingCard.some((item) => item.id === itemIndexId
-
-      const index = shoppingCard.findIndex(item => item.id === itemIndexId);
-    //   FIXME current Idex error 
-        updateItem(shoppingCard, itemsDb, itemIndexId)
-
-        console.log(shoppingCard[1])
-    // update
+    updateShoppingCard(shoppingCard, itemsDb, itemIndexId);
   } else {
-    // add
+    /* append item */
     shoppingCard.push(itemsDb[itemIndexId]);
   }
 
+  console.log(shoppingCard[itemIndexId]);
 }
 
-function updateShoppingCard() {}
+/**
+ *
+ * @param { Array } objectContainer - looped over objectContainer
+ * @param { Number } itemIndex current Item index
+ */
+function updateShoppingCard(shoppingCard, itemsDb, dbItemIndexId) {
+  const currItemIndxPos = shoppingCard.findIndex(
+    (item) => item.id === dbItemIndexId
+  );
 
-
-
-function updateItem(shoppingCard, itemsDb, itemIndexId) {
-   
-    return (shoppingCard[itemIndexId] = {
-     
-      ...shoppingCard[itemIndexId],
-        
+  return (shoppingCard[currItemIndxPos] = {
+    ...shoppingCard[currItemIndxPos],
     //   added to the current value the ++ value
-        price:  (shoppingCard[itemIndexId].price+itemsDb[itemIndexId].price) 
-    
-    });
-
-   
-  }
+    price: shoppingCard[currItemIndxPos].price + itemsDb[dbItemIndexId].price,
+  });
+}
