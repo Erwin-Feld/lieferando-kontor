@@ -106,7 +106,7 @@ function addToShoppingCard() {
     // render basket
     renderShoppingCard(shoppingCard);
   }
-  console.log(shoppingCard);
+ 
 }
 
 /**
@@ -127,30 +127,56 @@ function updateShoppingCard(shoppingCard, itemsDb, dbItemIndexId) {
   });
 }
 
-function delOfShoppingCard() {
-  // id is x,01 round it with this method to whole number
-  
-  const itemIndexId = parseInt(this.id);
-  
-  const currItemIndxPos = shoppingCard.findIndex(
-    (item) => item.id === itemIndexId
+
+function delShoppingCardValue(shopItemIndex){
+  const itemsDbItemIndex = itemsDb.findIndex(
+    (item) => item.item === shoppingCard[shopItemIndex].item
     );
-    console.log(shoppingCard[currItemIndxPos])
-    
-    
-    if (shoppingCard[currItemIndxPos].price > itemsDb[itemIndexId].price) {
+
+
+  return (shoppingCard[shopItemIndex] = {
+    ...shoppingCard[shopItemIndex],
+    //   added to the current value the ++ value
+    price: shoppingCard[shopItemIndex].price - itemsDb[itemsDbItemIndex].price, 
+  
+  });
+
+}
+
+
+
+function delOfShoppingCard() {
+  
+  // id is x,01 round it with this method to whole number
+  const shopCardItemIndex = parseInt(this.id);
+  
+
+  /* find where the item is indexed at the itemsDb */
+  const itemsDbItemIndex = itemsDb.findIndex(
+    (item) => item.item === shoppingCard[shopCardItemIndex].item
+    );
+
+   
+    if (shoppingCard[shopCardItemIndex].price > itemsDb[itemsDbItemIndex].price) {
       console.log("fired")
-      return (shoppingCard[currItemIndxPos] = {
-        ...shoppingCard[currItemIndxPos],
-        //   added to the current value the ++ value
-        price: shoppingCard[currItemIndxPos].price - itemsDb[itemIndexId].price,
-      });
+
+
+      // return (shoppingCard[shopCardItemIndex] = {
+      //   ...shoppingCard[shopCardItemIndex],
+      //   //   added to the current value the ++ value
+      //   price: shoppingCard[shopCardItemIndex].price - itemsDb[itemsDbItemIndex].price, 
+      // });
+    delShoppingCardValue(shopCardItemIndex)
+    renderShoppingCard(shoppingCard)      
+
+
     } else if (
-      shoppingCard[currItemIndxPos].price === itemsDb[itemIndexId].price
+      shoppingCard[shopCardItemIndex].price === itemsDb[itemsDbItemIndex].price
       ) {
         // Add splice to it
         // splice the value
-        // shoppingCard.splice([noteArrayElementId - 1], 1)
+        shoppingCard.splice([shopCardItemIndex - 1], 1)
+        renderShoppingCard(shoppingCard)
       }
       // find current index
       // delete one value
@@ -159,3 +185,23 @@ function delOfShoppingCard() {
       
       // render
     }
+
+
+    /* 
+    //TODO
+    fix delete from shopping card
+
+    how to pass arguments from outer function 
+
+    to the inner function 
+    if in function body another function is called
+
+    how to bind parameters in eventlistener
+
+    same parameter names in outer function and inner function
+    is this a problem ?
+
+    
+    */
+
+    
