@@ -1,5 +1,21 @@
+body {
+    background-color: rgb(88, 87, 87);
+}
 
 .container {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+}
+
+.db-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.card-container {
     display: flex;
     flex-direction: column;
 }

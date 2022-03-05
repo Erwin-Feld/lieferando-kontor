@@ -6,6 +6,7 @@ const itemsDb = [
 
 const shoppingCard = [];
 
+
 function renderItemsDb(itemsDb, shoppingCard) {
   const container = document.createElement("div");
   container.setAttribute("class", "db-container");
@@ -25,8 +26,6 @@ function renderItemsDb(itemsDb, shoppingCard) {
   });
 }
 
-// FIXME
-// add correctly renderShoppingCard
 function renderShoppingCard(shoppingCard) {
   // delete check
   const cardContainer = document.querySelector(".card-container");
@@ -102,6 +101,8 @@ function addToShoppingCard() {
   } else {
     /* append item */
     shoppingCard.push(itemsDb[itemIndexId]);
+
+    console.log(shoppingCard)
     // renderShoppingCard(shoppingCard);
     // render basket
     renderShoppingCard(shoppingCard);
@@ -189,7 +190,6 @@ function delOfShoppingCard() {
 
     /* 
     //TODO
-    fix delete from shopping card
 
     how to pass arguments from outer function 
 
